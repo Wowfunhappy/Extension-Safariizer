@@ -12,6 +12,13 @@
 (function () {
   "use strict";
 
+  // In a WebKit older than this needs, the user is told, and nothing here
+  // starts (runtime/webkit-requirement.js, which the global page loads ahead
+  // of this with the minimum in runtime/webkit-minimum.js).
+  if (!WebKitRequirement.start("Extension Safariizer")) {
+    return;
+  }
+
   var IDENTITY_KEY = "signingIdentity";
   var URL_SETTING = "convertUrl";
 

@@ -41,7 +41,8 @@ function parseArguments() {
 }
 
 function globalPage() {
-  const scripts = require(path.join(CONVERTER, "files.json")).map((file) => "converter/" + file)
+  const scripts = ["runtime/webkit-minimum.js", "runtime/webkit-requirement.js"]
+    .concat(require(path.join(CONVERTER, "files.json")).map((file) => "converter/" + file))
     .concat(["global.js"]);
   return "<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n" +
     "  <title>" + NAME + "</title>\n" +

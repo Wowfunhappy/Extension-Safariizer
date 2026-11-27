@@ -205,9 +205,10 @@ function pageLocation(sandbox, href, extra) {
   return Object.assign(location, extra || {});
 }
 
-// Safari 7's navigator, its fields on the prototype as WebKit has them.
-const SAFARI_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_5) AppleWebKit/537.78.2 " +
-  "(KHTML, like Gecko) Version/7.0.6 Safari/537.78.2";
+// Safari 7's navigator over Aqua WebKit, its fields on the prototype as WebKit
+// has them. Its version meets the minimum in webkit-minimum.js.
+const SAFARI_UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 " +
+  "(KHTML, like Gecko) Version/27.2 Safari/605.1.15";
 // Each JavaScript world has a Navigator of its own.
 function navigatorClass() {
   const Navigator = class Navigator {};

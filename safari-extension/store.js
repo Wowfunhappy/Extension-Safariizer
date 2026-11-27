@@ -18,6 +18,14 @@
     return;
   }
 
+  // In a WebKit older than the extension needs, its global page does not
+  // start, and the store keeps its own button (runtime/webkit-requirement.js,
+  // which Safari injects ahead of this with the minimum in
+  // runtime/webkit-minimum.js).
+  if (!WebKitRequirement.met()) {
+    return;
+  }
+
   var MARK = "data-w2s-button";
   var HIDDEN = "data-w2s-hidden";
 

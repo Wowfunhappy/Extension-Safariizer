@@ -105,8 +105,9 @@ class FakeElement {
   }
 }
 
-// Loads store.js on a page of the Chrome Web Store for extension `id`.
-function page(id) {
+// Loads store.js on a page of the Chrome Web Store for extension `id`, in a
+// WebKit that is `tooOld` or new enough.
+function page(id, tooOld) {
   const root = new FakeElement("HTML");
   const body = root.appendChild(new FakeElement("BODY"));
   const sent = [];
@@ -162,7 +163,8 @@ function page(id) {
     atob: (data) => Buffer.from(data, "base64").toString("binary"),
     URL: { createObjectURL: () => "blob:x", revokeObjectURL() {} },
     Blob: function () {},
-    Uint8Array
+    Uint8Array,
+    WebKitRequirement: { met: () => !tooOld }
   });
   return {
     body,
@@ -255,6 +257,11 @@ console.log("A conversion under way");
   tab.receive("w2s-converted", { job: "another page's", fileName: "Other.safariextz", data: "AA==" });
   equal("while another job's archive is not saved", tab.saved, []);
 }
+
+console.log("In a WebKit older than the extension needs");
+
+equal("the store keeps its own button, with no button of the extension's beside it",
+  page(FIRST, true).button() === undefined, true);
 
 console.log("\n" + passed + " checks passed, " + failed + " failed");
 process.exitCode = failed ? 1 : 0;

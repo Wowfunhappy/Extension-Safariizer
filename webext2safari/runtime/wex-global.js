@@ -24,6 +24,13 @@
   var done = WEX.done;
   var settle = WEX.settle;
 
+  // In a WebKit older than the runtime needs, the user is told, and neither
+  // the runtime nor the extension's background scripts start
+  // (webkit-requirement.js, which the global page loads ahead of the runtime).
+  if (g.WebKitRequirement && !g.WebKitRequirement.start(CONFIG.name)) {
+    return;
+  }
+
   if (!native) {
     log.error("this WebKit provides no `browser` namespace for extensions; " +
       "the extension cannot run");

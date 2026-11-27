@@ -26,6 +26,10 @@
   var NETWORK_JS = WEX_DIR + "/wex-network.js";
   var RUN_START_JS = WEX_DIR + "/wex-run-start.js";
   var RUN_END_JS = WEX_DIR + "/wex-run-end.js";
+  // The least WebKit the runtime runs in, and its check, which the global
+  // page loads ahead of the rest of the runtime.
+  var MINIMUM_JS = WEX_DIR + "/webkit-minimum.js";
+  var REQUIREMENT_JS = WEX_DIR + "/webkit-requirement.js";
   // What Safari injects at document start ahead of the extension's own
   // scripts: the files above that the content bridge runs, as one (writeBridge).
   var BRIDGE_JS = WEX_DIR + "/wex-bridge.js";
@@ -69,9 +73,9 @@
       "})(document);\n";
   }
 
-  var RUNTIME_FILES = ["wex-core.js", "wex-global.js", "wex-page.js", "wex-content.js",
-                       "wex-run-start.js", "wex-run-end.js", "wex-network.js", "wex-devtools.js",
-                       "wex-download.js", "wex-worker-relay.js"];
+  var RUNTIME_FILES = ["webkit-minimum.js", "webkit-requirement.js", "wex-core.js", "wex-global.js",
+                       "wex-page.js", "wex-content.js", "wex-run-start.js", "wex-run-end.js",
+                       "wex-network.js", "wex-devtools.js", "wex-download.js", "wex-worker-relay.js"];
 
   // What the converter reads from the runtime's directory: the schemas of
   // Chrome's API (tools/update-chrome-api.js) and the enums of Firefox's
@@ -812,7 +816,8 @@
     function src(path) {
       return relpath(path, here || ".");
     }
-    var tags = [CONFIG_JS, API_JS, CORE_JS, GLOBAL_JS, NETWORK_JS].concat(globals).map(function (s) {
+    var runtime = [MINIMUM_JS, REQUIREMENT_JS, CONFIG_JS, API_JS, CORE_JS, GLOBAL_JS, NETWORK_JS];
+    var tags = runtime.concat(globals).map(function (s) {
       return '  <script src="' + src(s) + '"></script>';
     });
     var kind = asModules ? ' type="module"' : "";
@@ -1578,7 +1583,8 @@
                               "bundle: " + globalPage);
       }
       htmlpatch.patchFile(bundle, bundle.storedPath(globalPage),
-                          [CONFIG_JS, API_JS, CORE_JS, GLOBAL_JS, NETWORK_JS].concat(backgroundGlobals(bundle)));
+                          [MINIMUM_JS, REQUIREMENT_JS, CONFIG_JS, API_JS, CORE_JS, GLOBAL_JS, NETWORK_JS]
+                            .concat(backgroundGlobals(bundle)));
       skipFromPagePatching.push(globalPage);
       notes.push("the extension's own background page is used as the global page");
     } else {

@@ -45,6 +45,14 @@ From the command line, Node.js 18 or later; the converter uses nothing beyond No
 own modules. Icons that are not PNGs are converted with the system's `sips`. In Safari,
 the Extension Safariizer extension needs nothing more.
 
+Converted bundles and Extension Safariizer itself run in Aqua WebKit 27.2 or later, by
+the Safari version the user agent gives (`Version/27.2`). In an older WebKit, the global
+page shows an alert naming the extension and does not start, and the store pages show
+no "Add to Safari" button. The minimum is `WEBKIT_MINIMUM` in
+`webext2safari/runtime/webkit-minimum.js`; `webkit-requirement.js` beside it does the
+check, depends on nothing else, and can go into any legacy Safari extension along with a
+`webkit-minimum.js` of its own.
+
 For live debugging without browser UI automation, see the reusable
 [local diagnostics server](diagnostics/README.md). It can temporarily instrument
 any converted bundle, collect results, and remove itself afterward.
@@ -1681,6 +1689,7 @@ node tests/global-fixes-2.js               # saving files, tab groups, moving ta
 node tests/global-fixes-3.js               # declarativeContent, sign-in, tab events, menus, page capture, a site's new tabs
 node tests/page-fixes.js                   # the bridge's boundary with web pages, content-script order, extension pages
 node tests/converter-fixes.js              # archives, images and pages that are unusual or hostile
+node tests/webkit-requirement.js           # the least WebKit an extension runs in
 node tests/smoke.js build/*.safariextension  # every converted bundle boots
 python3 -m unittest tests/test_diagnostics.py  # the diagnostics server
 ```
