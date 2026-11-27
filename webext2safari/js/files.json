@@ -1,0 +1,22 @@
+[
+  "vendor/pako.min.js",
+  "bytes.js",
+  "hash.js",
+  "rsa.js",
+  "xar.js",
+  "pyjson.js",
+  "plist.js",
+  "tree.js",
+  "zip.js",
+  "webstore.js",
+  "patterns.js",
+  "manifest.js",
+  "htmlpatch.js",
+  "svg.js",
+  "javascript.js",
+  "analyze.js",
+  "png.js",
+  "template.js",
+  "icons.js",
+  "convert.js"
+]

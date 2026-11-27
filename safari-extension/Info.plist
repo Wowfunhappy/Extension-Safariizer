@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Author</key>
+	<string>Wowfunhappy</string>
+	<key>Builder Version</key>
+	<string>9537.78.2</string>
+	<key>CFBundleDisplayName</key>
+	<string>Extension Safariizer</string>
+	<key>CFBundleIdentifier</key>
+	<string>Wowfunhappy.extension-safariizer</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.1</string>
+	<key>CFBundleVersion</key>
+	<string>1.1</string>
+	<key>Chrome</key>
+	<dict>
+		<key>Global Page</key>
+		<string>global.html</string>
+	</dict>
+	<key>Content</key>
+	<dict>
+		<key>Scripts</key>
+		<dict>
+			<key>End</key>
+			<array>
+				<string>store.js</string>
+			</array>
+		</dict>
+		<key>Whitelist</key>
+		<array>
+			<string>https://chromewebstore.google.com/*</string>
+			<string>https://chrome.google.com/webstore/*</string>
+			<string>https://addons.mozilla.org/*</string>
+		</array>
+	</dict>
+	<key>Description</key>
+	<string>Add Chrome and Firefox extensions to Safari, directly from the Chrome Web Store and Firefox Add-ons Catalog.</string>
+	<key>ExtensionInfoDictionaryVersion</key>
+	<string>1.0</string>
+	<key>Permissions</key>
+	<dict>
+		<key>Website Access</key>
+		<dict>
+			<key>Include Secure Pages</key>
+			<true/>
+			<key>Level</key>
+			<string>All</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
