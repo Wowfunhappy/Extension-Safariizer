@@ -1,6 +1,6 @@
 // The converter's global page.
 //
-// A store page's "Add to Safari" button (store.js) asks for an extension by
+// A store page's "Download for Safari" button (store.js) asks for an extension by
 // its page's address, and an address entered in the extension's preference
 // in Safari's Preferences opens convert.html, which asks for the extension
 // at that address the same way. This downloads the extension, converts it with the

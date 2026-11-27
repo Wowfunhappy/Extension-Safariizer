@@ -41,6 +41,8 @@
 	</dict>
 	<key>Description</key>
 	<string>Add Chrome and Firefox extensions to Safari, directly from the Chrome Web Store and Firefox Add-ons Catalog.</string>
+	<key>DeveloperIdentifier</key>
+	<string>U5LEPOL722</string>
 	<key>ExtensionInfoDictionaryVersion</key>
 	<string>1.0</string>
 	<key>Permissions</key>
@@ -53,5 +55,7 @@
 			<string>All</string>
 		</dict>
 	</dict>
+	<key>Update Manifest URL</key>
+	<string>https://mavericksforever.com/safari-extensions-gallery/updates.plist</string>
 </dict>
 </plist>

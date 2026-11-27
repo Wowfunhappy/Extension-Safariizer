@@ -1,4 +1,4 @@
-// Puts an "Add to Safari" button on extension pages of the Chrome Web Store
+// Puts a "Download for Safari" button on extension pages of the Chrome Web Store
 // and Firefox Add-ons.
 //
 // The store's own install button, which Safari cannot use, is hidden and a
@@ -199,7 +199,7 @@
     }
     button.setAttribute(MARK, "");
     button.setAttribute("title", "Convert this extension into a Safari extension and download it");
-    setLabel(button, "Add to Safari");
+    setLabel(button, "Download for Safari");
     button.addEventListener("click", onClick, true);
     return button;
   }

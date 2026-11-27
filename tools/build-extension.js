@@ -2,10 +2,8 @@
 //
 //     node tools/build-extension.js [-o DIR]
 //
-// Writes "Extension Safariizer.safariextension", for Extension Builder, and
-// "Extension Safariizer.safariextz", signed and ready to open in Safari, into
-// DIR (default ./dist). The archive is signed with the identity kept in
-// DIR/signing-identity.json, which is made on the first build.
+// Writes "Extension Safariizer.safariextension" into DIR (default ./dist), for
+// Extension Builder to package and sign with a Safari developer certificate.
 //
 // The bundle holds every file of safari-extension/, Info.plist and
 // Settings.plist among them, as they are; tools/sync-extension.js brings
@@ -85,14 +83,6 @@ function bundleFiles() {
   return files;
 }
 
-function loadIdentity(output) {
-  const file = path.join(output, "signing-identity.json");
-  if (!fs.existsSync(file)) {
-    fs.writeFileSync(file, JSON.stringify(W2S.rsa.createIdentity()), { mode: 0o600 });
-  }
-  return W2S.rsa.loadIdentity(JSON.parse(fs.readFileSync(file, "utf8")));
-}
-
 // -- the built bundle and its record ------------------------------- //
 
 function bundleDirectory(output) {
@@ -157,7 +147,6 @@ function main() {
       "or delete " + bundleDirectory(output) + " to discard them");
   }
   const files = bundleFiles();
-  const bundleName = NAME + ".safariextension";
 
   const bundleDir = bundleDirectory(output);
   fs.rmSync(bundleDir, { recursive: true, force: true });
@@ -169,12 +158,7 @@ function main() {
     record[name] = hash(files.read(name));
   }
   fs.writeFileSync(recordPath(output), JSON.stringify(record, null, 1) + "\n");
-
-  const archive = W2S.convert.pack({ bundleName, files }, loadIdentity(output));
-  const archivePath = path.join(output, NAME + ".safariextz");
-  fs.writeFileSync(archivePath, archive);
   console.log(bundleDir);
-  console.log(archivePath);
 }
 
 if (require.main === module) {

@@ -22,7 +22,7 @@ adapts simple Chrome extension URL construction using a generic syntax rule.
 Both MV2 and MV3 manifests are accepted.
 
 The converter also comes as a Safari extension, Extension Safariizer, which puts an
-"Add to Safari" button on the Chrome Web Store and on Firefox Add-ons. Pressing it
+"Download for Safari" button on the Chrome Web Store and on Firefox Add-ons. Pressing it
 downloads the extension, converts it in the browser, and saves a signed `.safariextz`
 that Safari installs when opened. An extension from anywhere else is converted from the
 address of its `.crx`, `.xpi` or `.zip`, entered in the extension's preference in
@@ -48,7 +48,7 @@ the Extension Safariizer extension needs nothing more.
 Converted bundles and Extension Safariizer itself run in Aqua WebKit 27.2 or later, by
 the Safari version the user agent gives (`Version/27.2`). In an older WebKit, the global
 page shows an alert naming the extension and does not start, and the store pages show
-no "Add to Safari" button. The minimum is `WEBKIT_MINIMUM` in
+no "Download for Safari" button. The minimum is `WEBKIT_MINIMUM` in
 `webext2safari/runtime/webkit-minimum.js`; `webkit-requirement.js` beside it does the
 check, depends on nothing else, and can go into any legacy Safari extension along with a
 `webkit-minimum.js` of its own.
@@ -128,10 +128,12 @@ Quitting and reopening Safari clears it, and the archive then installs as it is.
 node tools/build-extension.js
 ```
 
-writes `dist/Extension Safariizer.safariextension` and a signed
-`dist/Extension Safariizer.safariextz`. Install the archive, then open an extension's page
+writes `dist/Extension Safariizer.safariextension`. Package it in Extension Builder with a
+Safari developer certificate, and install the archive. Its Info.plist names the Safari
+Extensions Gallery's update manifest, so an archive signed with the gallery's certificate
+updates from the gallery. Then open an extension's page
 on the Chrome Web Store or on addons.mozilla.org: its install button is replaced by
-"Add to Safari". Once the extension is converted and installed, the button says
+"Download for Safari". Once the extension is converted and installed, the button says
 "Installed", in the store's own style for a button that does nothing: the converter
 remembers which bundle each store page's extension became, and asks that bundle, through
 the engine's messaging between extensions, whether it is there. A converted extension's
@@ -1681,7 +1683,7 @@ node tests/convert.js                      # the converter's rewrites, rulesets,
 node tests/offscreen.js                    # offscreen lifecycle and messaging
 node tests/network.js                      # native request identity and absence of page helpers
 node tests/i18n-inline.js                  # catalogues carried in the config, and read from their files
-node tests/store.js                        # the store pages' "Add to Safari" button
+node tests/store.js                        # the store pages' "Download for Safari" button
 node tests/core-fixes.js                   # match patterns, i18n fallback, the content-script scanner, file system stand-in
 node tests/core-fixes-2.js                 # response-header rules, document targeting, injected files, legacy requests
 node tests/global-fixes-1.js               # navigations from the web, storage, toolbar, side panel, debugger

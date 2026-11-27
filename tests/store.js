@@ -1,4 +1,4 @@
-// Tests of the "Add to Safari" button on store pages, against a small stand-in
+// Tests of the "Download for Safari" button on store pages, against a small stand-in
 // for the page.
 //
 //     node tests/store.js
@@ -235,12 +235,12 @@ console.log("A conversion under way");
   tab.button().style = {};
   tab.body.removeChild(tab.button());
   tab.changed();
-  equal("leaves the next extension's button as it is", tab.button().textContent, "Add to Safari");
+  equal("leaves the next extension's button as it is", tab.button().textContent, "Download for Safari");
   tab.receive("w2s-progress", { job, stage: "convert" });
-  equal("whatever its progress", tab.button().textContent, "Add to Safari");
+  equal("whatever its progress", tab.button().textContent, "Download for Safari");
   tab.receive("w2s-converted", { job, fileName: "First.safariextz", data: "AA==" });
   equal("has its archive saved after the page moves on", [tab.saved, tab.button().textContent],
-    [["First.safariextz"], "Add to Safari"]);
+    [["First.safariextz"], "Download for Safari"]);
   tab.navigate(FIRST);
   tab.body.removeChild(tab.button());
   tab.changed();
